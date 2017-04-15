@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript学习系列之初识原型继承和原型链 | justLemon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我们将JavaScript对象分为函数对象和普通对象。函数对象用function关键字定义的对象或者对其使用typeof运算符返回”function”的对象。  JavaScript引擎内置的函数对象（构造器） 123456typeof Array//&quot;function&quot;typeof Number//&quot;function&quot;typeof Boolean//&quot;function&quot;typeof String">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript学习系列之初识原型继承和原型链">
+<meta property="og:url" content="http://yoursite.com/2016/10/31/JavaScript学习系列之初识原型继承和原型链/index.html">
+<meta property="og:site_name" content="justLemon">
+<meta property="og:description" content="我们将JavaScript对象分为函数对象和普通对象。函数对象用function关键字定义的对象或者对其使用typeof运算符返回”function”的对象。  JavaScript引擎内置的函数对象（构造器） 123456typeof Array//&quot;function&quot;typeof Number//&quot;function&quot;typeof Boolean//&quot;function&quot;typeof String">
+<meta property="og:image" content="c:/Users/PC/Desktop/1.png">
+<meta property="og:image" content="c:/Users/PC/Desktop/2.png">
+<meta property="og:updated_time" content="2017-04-15T13:03:11.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript学习系列之初识原型继承和原型链">
+<meta name="twitter:description" content="我们将JavaScript对象分为函数对象和普通对象。函数对象用function关键字定义的对象或者对其使用typeof运算符返回”function”的对象。  JavaScript引擎内置的函数对象（构造器） 123456typeof Array//&quot;function&quot;typeof Number//&quot;function&quot;typeof Boolean//&quot;function&quot;typeof String">
+<meta name="twitter:image" content="c:/Users/PC/Desktop/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="justLemon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">justLemon</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">anything but ordinary</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript学习系列之初识原型继承和原型链" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/31/JavaScript学习系列之初识原型继承和原型链/" class="article-date">
+  <time datetime="2016-10-31T12:16:00.000Z" itemprop="datePublished">2016-10-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript学习系列之初识原型继承和原型链
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="我们将JavaScript对象分为函数对象和普通对象。"><a href="#我们将JavaScript对象分为函数对象和普通对象。" class="headerlink" title="我们将JavaScript对象分为函数对象和普通对象。"></a>我们将JavaScript对象分为函数对象和普通对象。</h3><h4 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h4><p>用function关键字定义的对象或者对其使用typeof运算符返回”function”的对象。</p>
+<ul>
+<li><p>JavaScript引擎内置的函数对象（构造器）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> <span class="built_in">Array</span><span class="comment">//"function"</span></div><div class="line"><span class="keyword">typeof</span> <span class="built_in">Number</span><span class="comment">//"function"</span></div><div class="line"><span class="keyword">typeof</span> <span class="built_in">Boolean</span><span class="comment">//"function"</span></div><div class="line"><span class="keyword">typeof</span> <span class="built_in">String</span><span class="comment">//"function"</span></div><div class="line"><span class="keyword">typeof</span> <span class="built_in">Object</span><span class="comment">//"function"</span></div><div class="line"><span class="keyword">typeof</span> <span class="built_in">Function</span><span class="comment">//"function"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>自定义的函数对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line"><span class="keyword">typeof</span> Animal<span class="comment">//"function"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="普通对象"><a href="#普通对象" class="headerlink" title="普通对象"></a>普通对象</h4><p>除了函数对象之外的其他对象都是普通对象。一般是大括号{}定义的对象或者new关键字返回的对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">Array</span>();<span class="comment">//"object"</span></div><div class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">String</span>();<span class="comment">//"object"</span></div><div class="line"><span class="keyword">typeof</span> &#123;&#125;;<span class="comment">//"object"</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> Animal(<span class="string">'kitty'</span>);<span class="comment">//"object"</span></div></pre></td></tr></table></figure></p>
+<h4 id="函数对象与普通对象的异同"><a href="#函数对象与普通对象的异同" class="headerlink" title="函数对象与普通对象的异同"></a>函数对象与普通对象的异同</h4><ul>
+<li>相同点<ol>
+<li>它们都是JavaScript中的的对象</li>
+<li>它们都有一个默认的<strong>proto</strong>属性（原型链的关键，后面详细解释）。</li>
+</ol>
+</li>
+<li>不同点<ol>
+<li>创建方式不同。函数对象需要用function关键字去定义。而普通对象一般由{}或new关键字来创建。</li>
+<li>函数对象实际上是对象构造器，可以new一个函数对象返回一个普通对象。</li>
+<li>对函数对象使用typeof运算符会返回function，而对普通对象使用的话返回object。</li>
+<li>每一个函数对象都有一个原型对象（prototype）与之关联。，而普通对象没有。 </li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="1-对象的prototype属性"><a href="#1-对象的prototype属性" class="headerlink" title="1.对象的prototype属性"></a>1.对象的prototype属性</h3><p>原型对象只有函数对象才有，普通对象一般是没有的。且每一个函数对象都有一个原型对象（prototype）与之相关联，一些常用的方法都保存在函数的原型对象中。如Array.prototype中就包含一些数组中常用的concat()、push()…等方法。我们首先需明确，原型对象本身是一个普通对象。<br>要注意的一点是，函数的原型对象除包含一些对象的公有方法之外，它还包含一个constructor属性，它指向与原型对象相关联的函数对象。</p>
+<ul>
+<li><p>JavaScript引擎内置的函数对象（构造器）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype);<span class="comment">//输出对应的原型对象，包含数组的常用方法。</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.constructor===<span class="built_in">Array</span>);<span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.prototype.constructor===<span class="built_in">String</span>);<span class="comment">//true</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>自定义的函数对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line">Animal.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">&#125;</div><div class="line"><span class="keyword">typeof</span> Animal<span class="comment">//"function"</span></div><div class="line"><span class="built_in">console</span>.log(Animal.prototype.constructor===Animal);<span class="comment">//true</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-对象的proto属性"><a href="#2-对象的proto属性" class="headerlink" title="2.对象的proto属性"></a>2.对象的<strong>proto</strong>属性</h3><p>当我们访问普通对象的属性object.xxx时,如果object自己没有xxx属性,则向上延原型链查找,如果找到,则返回,没找到,则返回undefined。原型链通过什么来实现这种向上查找呢？没错，就是<strong>proto</strong>属性。<br>每一个对象都有<strong>proto</strong>属性，它在对象创建时默认存在，但一般我们都不去使用或者改变它。</p>
+<ul>
+<li><p>函数对象与其<strong>proto</strong>属性<br>所有函数(构造器)的<strong>proto</strong>都指向Function.prototype，它是一个空函数（Empty function）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Array</span>.__proto__===<span class="built_in">Function</span>.prototype<span class="comment">//true</span></div><div class="line"><span class="built_in">Number</span>.__proto__===<span class="built_in">Function</span>.prototype<span class="comment">//true</span></div><div class="line"><span class="built_in">String</span>.__proto__===<span class="built_in">Function</span>.prototype<span class="comment">//true</span></div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+<li><p>普通对象与其<strong>proto</strong>属性<br><strong>普通对象的<strong>proto</strong>指向函数对象（构造器）的原型对象（prototype）。</strong><br>JavaScript引擎的内置构造函数生成的对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">name</span>: <span class="string">'tea'</span>&#125;;<span class="comment">//相当于new Object(obj)</span></div><div class="line"><span class="keyword">var</span> array = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];<span class="comment">//相当于new Array(1,2,3)</span></div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/hello/g</span>;<span class="comment">//相当于new RegExp('hello','g');</span></div><div class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line"><span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'exception'</span>);</div><div class="line"> </div><div class="line"><span class="built_in">console</span>.log(obj.__proto__ === <span class="built_in">Object</span>.prototype) <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(array.__proto__ === <span class="built_in">Array</span>.prototype)  <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(reg.__proto__ === <span class="built_in">RegExp</span>.prototype) <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(date.__proto__ === <span class="built_in">Date</span>.prototype)  <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(err.__proto__ === <span class="built_in">Error</span>.prototype)  <span class="comment">// true</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>自定义构造函数生成的对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">'jack'</span>)</div><div class="line"><span class="built_in">console</span>.log(p.__proto__ === Person.prototype) <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+<h3 id="3-原型继承"><a href="#3-原型继承" class="headerlink" title="3.原型继承"></a>3.原型继承</h3><p>要想理解JavaScript的继承，必须先区分实例与构造器的区别。首先，实例对象是普通对象，而构造器是函数对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">'jack'</span>)</div></pre></td></tr></table></figure></p>
+<p>Person是构造器，也就是函数对象，它具有Person.prototype原型对象与之对应，它的<strong>proto</strong>属性值为Function.prototype。而p是实例，它是普通对象且没有原型，它的<strong>proto</strong>属性值为Person.prototype。<br>想要实现继承，最简单的方法就是让子类的原型指向父类的实例。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line">Animal.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line">Dog.prototype = <span class="keyword">new</span> Animal(<span class="string">'test'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> animal = <span class="keyword">new</span> Animal(<span class="string">'animal'</span>);</div><div class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog(<span class="string">'dog'</span>);</div><div class="line"><span class="built_in">console</span>.log(animal.getName());<span class="comment">//输出animal</span></div><div class="line"><span class="built_in">console</span>.log(dog.getName());<span class="comment">//输出dog</span></div></pre></td></tr></table></figure></p>
+<h3 id="4-原型链"><a href="#4-原型链" class="headerlink" title="4.原型链"></a>4.原型链</h3><p>在了解上述各种属性之后，我们来看一个关于原型链的图。<br><img src="C:\Users\PC\Desktop\1.png" alt="Alt text"><br>当在对象的域中没有找到我们想要的属性时，js引擎会访问_proto<strong>指针指向的对象，并从中寻找要访问的属性，若找到，则返回属性。若没有找到，则继续访问当前</strong>proto<strong>指向的对象。以此类推，直到访问到Object.prototype.</strong>proto<strong>指向的对象（空对象）才停止。最后都没找到的话返回undefined。<br>所以真正形成原型链的是是每个对象的</strong>proto__属性，而不是函数的prototype属性</p>
+<p>接下来，我们看一下3中继承的例子的原型链是怎样的。<br><img src="C:\Users\PC\Desktop\2.png" alt="Alt text"><br>从图中可以知道<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog();</div><div class="line">dog.__proto__ === Dog.prototype;<span class="comment">//true</span></div><div class="line">Dog.prototype.__proto__ === Animal.prototype;<span class="comment">//true</span></div><div class="line">dog.constructor === Animal;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/31/JavaScript学习系列之初识原型继承和原型链/" data-id="cj1jaln840002r8o00dlfbrv3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/22/css实现面包屑导航与冒泡框（border属性与伪类选择器）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          css实现面包屑导航与冒泡框（border属性与伪类选择器）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/07/JavaScript正则表达式学习（上）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaScript正则表达式学习（上）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/09/ES6新特性之promise/">ES6新特性之promise</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/原生DOM接口实现表格的排序/">原生DOM接口学习之实现表格的排序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/20/jQuery插件之可动态修改列表/">jQuery插件之动态列表</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/22/JavaScript学习系列之深入原型链与继承的实现/">JavaScript学习系列之深入原型链与继承的实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

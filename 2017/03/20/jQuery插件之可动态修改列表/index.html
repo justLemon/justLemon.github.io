@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery插件之动态列表 | justLemon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言jQuery为我们的开发带来巨大的便利，当我们想实现一个独立的功能时候，我们可能会想到用jQuery插件来是一种不错的选择。jQuery在设计之初就为我们提供了扩展机制。我们可以通过以下三种方法实现插件开发。  通过$.extend(),这种方法在jQuery身上而不是它的原型对象上添加了一个静态方法，一般通过$.myfunc()调用这种插件。 通过$.fn或者$.fn.extend(), 这">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery插件之动态列表">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/jQuery插件之可动态修改列表/index.html">
+<meta property="og:site_name" content="justLemon">
+<meta property="og:description" content="前言jQuery为我们的开发带来巨大的便利，当我们想实现一个独立的功能时候，我们可能会想到用jQuery插件来是一种不错的选择。jQuery在设计之初就为我们提供了扩展机制。我们可以通过以下三种方法实现插件开发。  通过$.extend(),这种方法在jQuery身上而不是它的原型对象上添加了一个静态方法，一般通过$.myfunc()调用这种插件。 通过$.fn或者$.fn.extend(), 这">
+<meta property="og:updated_time" content="2017-04-15T13:04:22.838Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery插件之动态列表">
+<meta name="twitter:description" content="前言jQuery为我们的开发带来巨大的便利，当我们想实现一个独立的功能时候，我们可能会想到用jQuery插件来是一种不错的选择。jQuery在设计之初就为我们提供了扩展机制。我们可以通过以下三种方法实现插件开发。  通过$.extend(),这种方法在jQuery身上而不是它的原型对象上添加了一个静态方法，一般通过$.myfunc()调用这种插件。 通过$.fn或者$.fn.extend(), 这">
+  
+    <link rel="alternate" href="/atom.xml" title="justLemon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">justLemon</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">anything but ordinary</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jQuery插件之可动态修改列表" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/20/jQuery插件之可动态修改列表/" class="article-date">
+  <time datetime="2017-03-20T11:59:00.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jQuery插件之动态列表
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>jQuery为我们的开发带来巨大的便利，当我们想实现一个独立的功能时候，我们可能会想到用jQuery插件来是一种不错的选择。jQuery在设计之初就为我们提供了扩展机制。我们可以通过以下三种方法实现插件开发。</p>
+<ul>
+<li>通过$.extend(),这种方法在jQuery身上而不是它的原型对象上添加了一个静态方法，一般通过$.myfunc()调用这种插件。</li>
+<li>通过$.fn或者$.fn.extend(), 这种方法较为普遍，它向jQuery的原型对象上(也就是$.fn)上添加新的方法，可以通过$(‘’).myfunc()调用这种插件。</li>
+<li>通过$.widget()应用jQuery UI的部件工厂方式创建，这种方法暂不介绍。<br>下面我们通过比较简单的第二种方式来实现jQuery插件。</li>
+</ul>
+<h2 id="实现jQuery插件"><a href="#实现jQuery插件" class="headerlink" title="实现jQuery插件"></a>实现jQuery插件</h2><h3 id="1-插件代码原型"><a href="#1-插件代码原型" class="headerlink" title="1.插件代码原型"></a>1.插件代码原型</h3><p>$.fn.extend(obj)是一种JavaScript的混入，就是把obj对象中的属性复制到jQuery的型对象中。我们用匿名函数自执行的方式来避免变量污染。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</div><div class="line">        $.fn.extend(&#123;</div><div class="line">            <span class="comment">//插件名，动态列表</span></div><div class="line">            <span class="string">"addDyList"</span> : <span class="function"><span class="keyword">function</span>(<span class="params">options</span>)</span>&#123;</div><div class="line">                <span class="comment">//用传进来的参数覆盖默认参数</span></div><div class="line">                <span class="keyword">var</span> configs = $.extend(&#123;&#125;, defaults, options);</div><div class="line">            &#125;,</div><div class="line">                </div><div class="line">        &#125;);</div><div class="line">        <span class="comment">//默认参数</span></div><div class="line">        <span class="keyword">var</span> defaults = &#123;</div><div class="line">            <span class="string">'values'</span> : [<span class="string">'HTML'</span>,<span class="string">'CSS'</span>,<span class="string">'JavaScript'</span>],</div><div class="line">        &#125;;</div><div class="line">        <span class="comment">//插件私有方法，增加一个列表项</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">newList</span>(<span class="params">lvalue</span>)</span>&#123;</div><div class="line">           </div><div class="line">        &#125;;</div><div class="line">        <span class="comment">//插件私有方法，从array中删除val</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">deleteFromArray</span>(<span class="params">array, val</span>)</span>&#123;</div><div class="line">        &#125;;</div><div class="line">        <span class="comment">//插件私有方法，更新array的某个值</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">updateArray</span>(<span class="params">array, oldVal, newVal</span>)</span>&#123;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    &#125;)(<span class="built_in">window</span>.jQuery);</div></pre></td></tr></table></figure></p>
+<p>以上代码是动态列表插件模型。</p>
+<h3 id="2-插件用法"><a href="#2-插件用法" class="headerlink" title="2.插件用法"></a>2.插件用法</h3><p>插件名叫做addDyList，它在某个选定的target元素上添加一个动态列表作为target的子元素。参数是一个对象，在对象中可以为动态列表传入初始数组和回掉函数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'target'</span>).addDyList(&#123;</div><div class="line">        <span class="comment">//初始化列表的数组</span></div><div class="line">        <span class="string">'values'</span> : [<span class="string">'HTML'</span>,<span class="string">'CSS'</span>,<span class="string">'JavaScript'</span>],</div><div class="line">        <span class="comment">//动态列表编辑完成之后的回掉函数，用于更新数据库</span></div><div class="line">        <span class="string">'oneditfinished'</span> : <span class="function"><span class="keyword">function</span>(<span class="params">vals</span>)</span>&#123;</div><div class="line">            <span class="comment">//用动态列表中的数组vals去更新数据库的操作</span></div><div class="line">        &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="3-插件demo与源代码"><a href="#3-插件demo与源代码" class="headerlink" title="3.插件demo与源代码"></a>3.插件demo与源代码</h3><p>demo：<a href="https://justlemon.github.io/jQueryPlugin/dyListPlugin/index.html" target="_blank" rel="external">https://justlemon.github.io/jQueryPlugin/dyListPlugin/index.html</a><br>代码地址：<a href="https://github.com/justLemon/jQueryPlugin" target="_blank" rel="external">https://github.com/justLemon/jQueryPlugin</a></p>
+<h3 id="4-插件实现原理"><a href="#4-插件实现原理" class="headerlink" title="4.插件实现原理"></a>4.插件实现原理</h3><p>利用jQuery对DOM操作的封装，我们可以很较为轻松的实现动态列表插件。</p>
+<ol>
+<li>插件的每个元素都有一个css类与之对应，我们可以用css自定义动态列表的外观。</li>
+<li>点击编辑目录时，进入列表的编辑状态，取消a标签的默认行为。让当前菜单消失，新菜单出现，新菜单拥有添加目录、删除目录、修改目录、返回等按钮。</li>
+<li>点击添加目录时，给列表动态添加一个包含输入框的列表项，用户可以选择确认或者取消来确认是否添加。</li>
+<li>点击删除目录时，显示每个列表项中隐藏的多选框，用户可以选择要删除的目录。</li>
+<li>点击修改目录时，显示每个列表项中隐藏的修改按钮。当点击修改按钮时，将当前列表项替换为带有输入框的列表项。注意替换时候需要将旧值作为data属性赋值给新的列表项，以便列表数据的更新。</li>
+<li>点击返回时，退出列表的编辑状态，恢复a标签的默认行为，让当前菜单消失。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/20/jQuery插件之可动态修改列表/" data-id="cj1jaln930006r8o0mu7hfavd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/22/JavaScript学习系列之深入原型链与继承的实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JavaScript学习系列之深入原型链与继承的实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/07/原生DOM接口实现表格的排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">原生DOM接口学习之实现表格的排序</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/09/ES6新特性之promise/">ES6新特性之promise</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/原生DOM接口实现表格的排序/">原生DOM接口学习之实现表格的排序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/20/jQuery插件之可动态修改列表/">jQuery插件之动态列表</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/22/JavaScript学习系列之深入原型链与继承的实现/">JavaScript学习系列之深入原型链与继承的实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
