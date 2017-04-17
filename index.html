@@ -68,6 +68,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-github上使用hexo搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/15/github上使用hexo搭建个人博客/" class="article-date">
+  <time datetime="2017-04-15T08:00:00.000Z" itemprop="datePublished">2017-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/15/github上使用hexo搭建个人博客/">github上使用hexo搭建个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-安装hexo"><a href="#一-安装hexo" class="headerlink" title="一 安装hexo"></a>一 安装hexo</h3><p>安装hexo需要用到Node.js的包管理工具npm，如果没有安装node的请先安装node。<br>此外还需要用到Git工具，也需要提前安装好。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//安装hexo</div><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
+<h3 id="二创建并配置博客"><a href="#二创建并配置博客" class="headerlink" title="二创建并配置博客"></a>二创建并配置博客</h3><p>安装完hexo后，我们开始在本地搭建一个静态博客系统</p>
+<h5 id="1-创建博客系统"><a href="#1-创建博客系统" class="headerlink" title="1.创建博客系统"></a>1.创建博客系统</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 建立一个博客文件夹myblog，并初始化博客</div><div class="line">hexo init myblog</div><div class="line">// 进入博客文件夹</div><div class="line">cd myblog</div><div class="line">// node.js的命令，根据博客既定的dependencies配置安装所有的依赖包</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<h5 id="2-博客系统目录"><a href="#2-博客系统目录" class="headerlink" title="2.博客系统目录"></a>2.博客系统目录</h5><ol>
+<li>scaffolds ：模板文件夹，新建文章时，Hexo 会根据 scaffold 来建立文件。Hexo 有三种默认布局： post、page和draft,它们分别对应不同的路径。新建文件的默认布局是post，可以在配置文件中更改布局。用draft布局生成的文件会被保存到 source/_drafts 文件夹。</li>
+<li>source : 资源文件夹是存放用户资源的地方。</li>
+<li>source/_post ：文件箱,存放博客我们写的博客的地方，除 <em>posts 文件夹之外，开头命名为 </em> (下划线)的文件/ 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</li>
+<li>themes ：主题文件夹。Hexo 会根据主题来生成静态页面。</li>
+<li>themes/landscape ：默认的皮肤文件夹。</li>
+<li>_config.yml ：全局的配置文件，每次更改要重启服务。</li>
+<li>public  : hexo generate生成的静态博客目录，与远程github仓库上的内容相同。</li>
+</ol>
+<h5 id="3-配置博客"><a href="#3-配置博客" class="headerlink" title="3.配置博客"></a>3.配置博客</h5><p>上一步创建了博客系统，基于上一步，我们对博客修改相应的配置，配置都在_config.yml文件中。我们并不需要配置所有的项，我们首次部署需要配置的地方已经在下面列出来，其他还有很多配置项需要我们自己慢慢去学习。<br>配置网站信息Site：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//主标题</div><div class="line">title: justLemon</div><div class="line">//副标题</div><div class="line">subtitle: Anything But Ordinary </div><div class="line">//网站描述</div><div class="line">description: justLemon&apos;s blog</div><div class="line">//语言</div><div class="line">language: zh-CN</div><div class="line">//时区</div><div class="line">timezone: Asia/Shanghai</div></pre></td></tr></table></figure></p>
+<p>配置目录信息Directory：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//不渲染成HTML的文件为README.md，此文件是github项目根目录下的说明文件。</div><div class="line">skip_render: README.md</div></pre></td></tr></table></figure></p>
+<p>配置部署信息Deployment：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: https://github.com/justLemon/justLemon.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>配置结束之后执行命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<p>执行这条命令使得我们可以把本地博客内容推送到github pages上。</p>
+<h3 id="三-博客本地运行与远程推送"><a href="#三-博客本地运行与远程推送" class="headerlink" title="三 博客本地运行与远程推送"></a>三 博客本地运行与远程推送</h3><h5 id="1-本地运行"><a href="#1-本地运行" class="headerlink" title="1.本地运行"></a>1.本地运行</h5><p>运行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
+<p>浏览器访问<a href="http://localhost:4000/，就可以在本地看到刚建立的博客。" target="_blank" rel="external">http://localhost:4000/，就可以在本地看到刚建立的博客。</a></p>
+<h5 id="2-写新的博客"><a href="#2-写新的博客" class="headerlink" title="2.写新的博客"></a>2.写新的博客</h5><p>可以用下面的命令新建一个文章<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &apos;blogTest&apos;</div></pre></td></tr></table></figure></p>
+<p>也可以把新的markdown格式的文件放到 source/_post 下，注意新的markdown文件的头部需要有一些标题、时间等信息。</p>
+<h5 id="3-远程推送"><a href="#3-远程推送" class="headerlink" title="3.远程推送"></a>3.远程推送</h5><p>每次写了新的博客，都要把本地内容推送到远程github仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//将新的内容放到到本地public文件夹</div><div class="line">hexo generate</div><div class="line">//将public文件夹推送到远程github仓库</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
+<p>注意：如果windows的cmd中运行hexo deploy中出现spawn git ENOENT错误，则改在git shell中执行此命令。 </p>
+<p>其他hexo命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//清空本地public文件夹</div><div class="line">hexo clean</div><div class="line">//新建文章</div><div class="line">hexo new &quot;postName&quot; </div><div class="line">//新建页面</div><div class="line">hexo new page &quot;pageName&quot; </div><div class="line">//帮助</div><div class="line">hexo help</div><div class="line">//查看Hexo的版本</div><div class="line">hexo version</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuchabin.me/2017/04/15/github上使用hexo搭建个人博客/" data-id="cj1lx27r30006xgo0sfbc3yh9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ES6新特性之promise" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/09/ES6新特性之promise/" class="article-date">
@@ -124,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qiuchabin.me/2017/04/09/ES6新特性之promise/" data-id="cj1lwrqr70001d0o0axrnmqo9" class="article-share-link">Share</a>
+      <a data-url="http://qiuchabin.me/2017/04/09/ES6新特性之promise/" data-id="cj1lx27pt0001xgo0c01pbhy4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -179,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qiuchabin.me/2017/04/07/原生DOM接口实现表格的排序/" data-id="cj1lwrqv20007d0o0avur75pb" class="article-share-link">Share</a>
+      <a data-url="http://qiuchabin.me/2017/04/07/原生DOM接口实现表格的排序/" data-id="cj1lx27ro0009xgo0wbu1qehm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -234,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qiuchabin.me/2017/03/20/jQuery插件之可动态修改列表/" data-id="cj1lwrqur0005d0o02of17k5i" class="article-share-link">Share</a>
+      <a data-url="http://qiuchabin.me/2017/03/20/jQuery插件之可动态修改列表/" data-id="cj1lx27r60007xgo0ajub28sb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -300,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qiuchabin.me/2017/02/22/JavaScript学习系列之深入原型链与继承的实现/" data-id="cj1lwrque0003d0o0pimr3zdk" class="article-share-link">Share</a>
+      <a data-url="http://qiuchabin.me/2017/02/22/JavaScript学习系列之深入原型链与继承的实现/" data-id="cj1lx27qi0003xgo0svxq59vs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -387,7 +447,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qiuchabin.me/2016/12/07/JavaScript正则表达式学习（上）/" data-id="cj1lwrqvk0008d0o0t4cab2op" class="article-share-link">Share</a>
+      <a data-url="http://qiuchabin.me/2016/12/07/JavaScript正则表达式学习（上）/" data-id="cj1lx27qq0004xgo00bwxb0kf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,7 +531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qiuchabin.me/2016/10/31/JavaScript学习系列之初识原型继承和原型链/" data-id="cj1lwrqsf0002d0o00ir21s46" class="article-share-link">Share</a>
+      <a data-url="http://qiuchabin.me/2016/10/31/JavaScript学习系列之初识原型继承和原型链/" data-id="cj1lx27q90002xgo0s5rzwh3b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -513,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qiuchabin.me/2016/10/22/css实现面包屑导航与冒泡框（border属性与伪类选择器）/" data-id="cj1lwrqul0004d0o05l16tzwq" class="article-share-link">Share</a>
+      <a data-url="http://qiuchabin.me/2016/10/22/css实现面包屑导航与冒泡框（border属性与伪类选择器）/" data-id="cj1lx27qz0005xgo0nnzbz1wh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -561,7 +621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qiuchabin.me/2016/10/21/javascript实现计数器理解this作用域/" data-id="cj1lwrquw0006d0o08t57bsu7" class="article-share-link">Share</a>
+      <a data-url="http://qiuchabin.me/2016/10/21/javascript实现计数器理解this作用域/" data-id="cj1lx27rk0008xgo0i1qax21r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -601,6 +661,10 @@
       <ul>
         
           <li>
+            <a href="/2017/04/15/github上使用hexo搭建个人博客/">github上使用hexo搭建个人博客</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/09/ES6新特性之promise/">ES6新特性之promise</a>
           </li>
         
@@ -614,10 +678,6 @@
         
           <li>
             <a href="/2017/02/22/JavaScript学习系列之深入原型链与继承的实现/">JavaScript学习系列之深入原型链与继承的实现</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/07/JavaScript正则表达式学习（上）/">JavaScript正则表达式学习（上）</a>
           </li>
         
       </ul>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>github上使用hexo搭建个人博客 | justLemon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一 安装hexo安装hexo需要用到Node.js的包管理工具npm，如果没有安装node的请先安装node。此外还需要用到Git工具，也需要提前安装好。12//安装hexonpm install -g hexo-cli 二创建并配置博客安装完hexo后，我们开始在本地搭建一个静态博客系统 1.创建博客系统123456// 建立一个博客文件夹myblog，并初始化博客hexo init myblo">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github上使用hexo搭建个人博客">
+<meta property="og:url" content="http://qiuchabin.me/2017/04/15/github上使用hexo搭建个人博客/index.html">
+<meta property="og:site_name" content="justLemon">
+<meta property="og:description" content="一 安装hexo安装hexo需要用到Node.js的包管理工具npm，如果没有安装node的请先安装node。此外还需要用到Git工具，也需要提前安装好。12//安装hexonpm install -g hexo-cli 二创建并配置博客安装完hexo后，我们开始在本地搭建一个静态博客系统 1.创建博客系统123456// 建立一个博客文件夹myblog，并初始化博客hexo init myblo">
+<meta property="og:updated_time" content="2017-04-17T09:40:32.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="github上使用hexo搭建个人博客">
+<meta name="twitter:description" content="一 安装hexo安装hexo需要用到Node.js的包管理工具npm，如果没有安装node的请先安装node。此外还需要用到Git工具，也需要提前安装好。12//安装hexonpm install -g hexo-cli 二创建并配置博客安装完hexo后，我们开始在本地搭建一个静态博客系统 1.创建博客系统123456// 建立一个博客文件夹myblog，并初始化博客hexo init myblo">
+  
+    <link rel="alternate" href="/atom.xml" title="justLemon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">justLemon</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Anything But Ordinary</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qiuchabin.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-github上使用hexo搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/15/github上使用hexo搭建个人博客/" class="article-date">
+  <time datetime="2017-04-15T08:00:00.000Z" itemprop="datePublished">2017-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      github上使用hexo搭建个人博客
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-安装hexo"><a href="#一-安装hexo" class="headerlink" title="一 安装hexo"></a>一 安装hexo</h3><p>安装hexo需要用到Node.js的包管理工具npm，如果没有安装node的请先安装node。<br>此外还需要用到Git工具，也需要提前安装好。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//安装hexo</div><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
+<h3 id="二创建并配置博客"><a href="#二创建并配置博客" class="headerlink" title="二创建并配置博客"></a>二创建并配置博客</h3><p>安装完hexo后，我们开始在本地搭建一个静态博客系统</p>
+<h5 id="1-创建博客系统"><a href="#1-创建博客系统" class="headerlink" title="1.创建博客系统"></a>1.创建博客系统</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 建立一个博客文件夹myblog，并初始化博客</div><div class="line">hexo init myblog</div><div class="line">// 进入博客文件夹</div><div class="line">cd myblog</div><div class="line">// node.js的命令，根据博客既定的dependencies配置安装所有的依赖包</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<h5 id="2-博客系统目录"><a href="#2-博客系统目录" class="headerlink" title="2.博客系统目录"></a>2.博客系统目录</h5><ol>
+<li>scaffolds ：模板文件夹，新建文章时，Hexo 会根据 scaffold 来建立文件。Hexo 有三种默认布局： post、page和draft,它们分别对应不同的路径。新建文件的默认布局是post，可以在配置文件中更改布局。用draft布局生成的文件会被保存到 source/_drafts 文件夹。</li>
+<li>source : 资源文件夹是存放用户资源的地方。</li>
+<li>source/_post ：文件箱,存放博客我们写的博客的地方，除 <em>posts 文件夹之外，开头命名为 </em> (下划线)的文件/ 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</li>
+<li>themes ：主题文件夹。Hexo 会根据主题来生成静态页面。</li>
+<li>themes/landscape ：默认的皮肤文件夹。</li>
+<li>_config.yml ：全局的配置文件，每次更改要重启服务。</li>
+<li>public  : hexo generate生成的静态博客目录，与远程github仓库上的内容相同。</li>
+</ol>
+<h5 id="3-配置博客"><a href="#3-配置博客" class="headerlink" title="3.配置博客"></a>3.配置博客</h5><p>上一步创建了博客系统，基于上一步，我们对博客修改相应的配置，配置都在_config.yml文件中。我们并不需要配置所有的项，我们首次部署需要配置的地方已经在下面列出来，其他还有很多配置项需要我们自己慢慢去学习。<br>配置网站信息Site：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//主标题</div><div class="line">title: justLemon</div><div class="line">//副标题</div><div class="line">subtitle: Anything But Ordinary </div><div class="line">//网站描述</div><div class="line">description: justLemon&apos;s blog</div><div class="line">//语言</div><div class="line">language: zh-CN</div><div class="line">//时区</div><div class="line">timezone: Asia/Shanghai</div></pre></td></tr></table></figure></p>
+<p>配置目录信息Directory：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//不渲染成HTML的文件为README.md，此文件是github项目根目录下的说明文件。</div><div class="line">skip_render: README.md</div></pre></td></tr></table></figure></p>
+<p>配置部署信息Deployment：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: https://github.com/justLemon/justLemon.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>配置结束之后执行命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<p>执行这条命令使得我们可以把本地博客内容推送到github pages上。</p>
+<h3 id="三-博客本地运行与远程推送"><a href="#三-博客本地运行与远程推送" class="headerlink" title="三 博客本地运行与远程推送"></a>三 博客本地运行与远程推送</h3><h5 id="1-本地运行"><a href="#1-本地运行" class="headerlink" title="1.本地运行"></a>1.本地运行</h5><p>运行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
+<p>浏览器访问<a href="http://localhost:4000/，就可以在本地看到刚建立的博客。" target="_blank" rel="external">http://localhost:4000/，就可以在本地看到刚建立的博客。</a></p>
+<h5 id="2-写新的博客"><a href="#2-写新的博客" class="headerlink" title="2.写新的博客"></a>2.写新的博客</h5><p>可以用下面的命令新建一个文章<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &apos;blogTest&apos;</div></pre></td></tr></table></figure></p>
+<p>也可以把新的markdown格式的文件放到 source/_post 下，注意新的markdown文件的头部需要有一些标题、时间等信息。</p>
+<h5 id="3-远程推送"><a href="#3-远程推送" class="headerlink" title="3.远程推送"></a>3.远程推送</h5><p>每次写了新的博客，都要把本地内容推送到远程github仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//将新的内容放到到本地public文件夹</div><div class="line">hexo generate</div><div class="line">//将public文件夹推送到远程github仓库</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
+<p>注意：如果windows的cmd中运行hexo deploy中出现spawn git ENOENT错误，则改在git shell中执行此命令。 </p>
+<p>其他hexo命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//清空本地public文件夹</div><div class="line">hexo clean</div><div class="line">//新建文章</div><div class="line">hexo new &quot;postName&quot; </div><div class="line">//新建页面</div><div class="line">hexo new page &quot;pageName&quot; </div><div class="line">//帮助</div><div class="line">hexo help</div><div class="line">//查看Hexo的版本</div><div class="line">hexo version</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuchabin.me/2017/04/15/github上使用hexo搭建个人博客/" data-id="cj1lx27r30006xgo0sfbc3yh9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/09/ES6新特性之promise/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ES6新特性之promise
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/15/github上使用hexo搭建个人博客/">github上使用hexo搭建个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/09/ES6新特性之promise/">ES6新特性之promise</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/原生DOM接口实现表格的排序/">原生DOM接口学习之实现表格的排序</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/20/jQuery插件之可动态修改列表/">jQuery插件之动态列表</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/22/JavaScript学习系列之深入原型链与继承的实现/">JavaScript学习系列之深入原型链与继承的实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
