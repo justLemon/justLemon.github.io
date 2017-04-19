@@ -184,10 +184,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="Catagory"><a href="#Catagory" class="headerlink" title="Catagory"></a>Catagory</h2><ol>
-<li><a href="#原型链">原型链</a></li>
-</ol>
-<hr>
+                <hr>
 <p>JavaScript是一种解释型语言，它不需要编译成二进制文件，是一种动态语言。不同于Java中继承的实现方式，JavaScript实现继承主要依靠强大的原型链机制来实现。</p>
 <h3 id="一-原型链"><a href="#一-原型链" class="headerlink" title="一 原型链"></a>一 原型链</h3><p>访问一个对象的属性时，先在基本属性中查找，如果没有，JavaScript 会向上遍历原型链，直到找到给定名称的属性为止，到查找到达原型链的顶部（也就是 Object.prototype）仍然没有找到属性，就会返回undefined。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line">obj.a <span class="comment">//输出undefined</span></div><div class="line"><span class="keyword">var</span> another = &#123; <span class="attr">a</span> : <span class="number">2</span>&#125;;</div><div class="line">obj.__proto__ = another;</div><div class="line">obj.a <span class="comment">//输出2</span></div></pre></td></tr></table></figure></p>
 <h5 id="对象属性屏蔽问题"><a href="#对象属性屏蔽问题" class="headerlink" title="对象属性屏蔽问题"></a>对象属性屏蔽问题</h5><p>当读取一个对象obj的属性a时候，如果obj本身不存在属性名为a的属性，就去原型链中查找属性。但是在obj中写入一个属性a的时候，即执行赋值语句obj.a = 4时候，则分如下几种情况：</p>
